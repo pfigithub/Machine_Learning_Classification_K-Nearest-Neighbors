@@ -11,3 +11,7 @@ df.head()
 # selecting features for x and y(base on our data)
 X = df[['region', 'tenure','age', 'marital', 'address', 'income', 'ed', 'employ','retire', 'gender', 'reside']] .values  #.astype(float)
 y = df['custcat'].values
+
+# normalizing data
+X = preprocessing.StandardScaler().fit(X).transform(X.astype(float))
+X[0:5]

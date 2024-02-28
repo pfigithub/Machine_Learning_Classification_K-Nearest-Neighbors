@@ -30,3 +30,8 @@ k = 4
 neigh = KNeighborsClassifier(n_neighbors = k).fit(X_train,y_train)
 # predicting
 yhat = neigh.predict(X_test)
+
+# evaluation
+from sklearn import metrics
+print("Train set Accuracy: ", metrics.accuracy_score(y_train, neigh.predict(X_train)))
+print("Test set Accuracy: ", metrics.accuracy_score(y_test, yhat))

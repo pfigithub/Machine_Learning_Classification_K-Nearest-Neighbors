@@ -35,3 +35,20 @@ yhat = neigh.predict(X_test)
 from sklearn import metrics
 print("Train set Accuracy: ", metrics.accuracy_score(y_train, neigh.predict(X_train)))
 print("Test set Accuracy: ", metrics.accuracy_score(y_test, yhat))
+
+# how about the other k?
+Ks = 10
+mean_acc = np.zeros((Ks-1))
+std_acc = np.zeros((Ks-1))
+
+for n in range(1,Ks):
+    
+    #Train Model and Predict  
+    neigh = KNeighborsClassifier(n_neighbors = n).fit(X_train,y_train)
+    yhat=neigh.predict(X_test)
+    mean_acc[n-1] = metrics.accuracy_score(y_test, yhat)
+
+    
+    std_acc[n-1]=np.std(yhat==y_test)/np.sqrt(yhat.shape[0])
+
+print( "The best accuracy was with", mean_acc.max(), "with k=", mean_acc.argmax()+1)
